@@ -1742,7 +1742,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741796485777),
+    lastupdate: new Date(1741836882020),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2161,7 +2161,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <!-- Custom Files headEnd end-->
   <!-- front-matter head_end begin -->
   <!-- front-matter head_end end -->
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://unpkg.com/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://unpkg.com/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
   <body itemscope itemtype="http://schema.org/WebPage">
     <!-- import body_begin begin-->
     <!-- import body_begin end-->
@@ -2559,8 +2563,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         请注意！！你需要确保你创建Python代码的位置路径不包含中文！否则会出现一些意料之外的问题
-PyWin32实现基础的游戏脚本首先，确保你安装好python(建议版本3.8开头的)，然后将这段指令直接粘贴进cmd里
-12345pip install opencv-python==4.4.0.40  -i https://pypi.mirrors.ustc.edu.cn/simple/pip ...
+ PyWin32实现基础的游戏脚本
+首先，确保你安装好python(建议版本3.8开头的)，然后将这段指令直接粘贴进cmd里
+12345pip install opencv-python==4.4.0.40  -i https://pypi.mirrors.ustc.edu.cn/simple/pi...
       
     
   </div>
@@ -2691,9 +2696,10 @@ PyWin32实现基础的游戏脚本首先，确保你安装好python(建议版本
   <div class='md article-desc' itemprop="articleBody">
     
       
-        first.py机器学习的HelloWorld，暴力方法对y&#x3D;kx+b线性模型进行拟合，拟合的结果
+         first.py
+机器学习的HelloWorld，暴力方法对y=kx+b线性模型进行拟合，拟合的结果
 
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from matplotlib import pyplot as plotfrom mp...
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from matplotlib import pyplot as plotfrom mpl_t...
       
     
   </div>
@@ -2756,8 +2762,9 @@ PyWin32实现基础的游戏脚本首先，确保你安装好python(建议版本
   <div class='md article-desc' itemprop="articleBody">
     
       
-        KCF目标跟踪调用TrackerKCF_create直接进行物体追踪
-12345678910111213141516171819202122232425262728import cv2class Point:    def __init__(self,x,y):        self.x=x        self.y=ytracker = cv2.TrackerKCF_create()v...
+         KCF目标跟踪
+调用TrackerKCF_create直接进行物体追踪
+12345678910111213141516171819202122232425262728import cv2class Point:    def __init__(self,x,y):        self.x=x        self.y=ytracker = cv2.TrackerKCF_create(...
       
     
   </div>
@@ -2887,8 +2894,9 @@ PyWin32实现基础的游戏脚本首先，确保你安装好python(建议版本
       
         PS：仅列出常用或默认的操作，对标野火的STM32F103教学视频整理出的笔记
 
-0x00 时钟的配置过程总结HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子
-0x01 HSE时钟 (High Speed...
+ 0x00 时钟的配置过程总结
+HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子
+ 0x01 HSE时钟 (High Sp...
       
     
   </div>
@@ -2951,14 +2959,17 @@ PyWin32实现基础的游戏脚本首先，确保你安装好python(建议版本
   <div class='md article-desc' itemprop="articleBody">
     
       
-        动态代理是啥东东动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程
+         动态代理是啥东东
+动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程
 简单来说，就是把原来应该执行的方法给拦截下来，执行我们代理类中提供的代码
 具象化一些，就是在原来方法的前后新增加一些代码，同时不用改动原来的方法
-AOP的关键术语解析
+ AOP的关键术语解析
+
 
 
 连接点
 类中可以被增强的方法
+
 
 
 
@@ -2971,7 +2982,7 @@ AOP的关键术语解析
 
 
 切面
-把增强塞进切...
+把...
       
     
   </div>
@@ -3034,11 +3045,12 @@ AOP的关键术语解析
   <div class='md article-desc' itemprop="articleBody">
     
       
-        取得模型推理出的位置数据、类YOLOv5的物象识别效果真是惊艳！
+         取得模型推理出的位置数据、类
+YOLOv5的物象识别效果真是惊艳！
 不过当我有这样一个需求：取得某个物件在图片中的的具体位置的数据并取出，供其他语言、类来调用应该如何操作呢？
 
 通过分析代码可以知道，run函数中的xyxy是存放矩形框的两个顶点、cls是类id（例如人的id是0）
-1label = None if hide_labels else (names[c] if hide_conf ...
+1label = None if hide_labels else (names[c] if hide_con...
       
     
   </div>
@@ -3101,11 +3113,12 @@ AOP的关键术语解析
   <div class='md article-desc' itemprop="articleBody">
     
       
-        准备工作读取灰度图的方法：
+         准备工作
+读取灰度图的方法：
 1img = imread(&lt;path&gt;,cv2.IMREAD_GRAYSCALE);
-
-滤波操作来，咱们首先产生些噪点
-12345678910111213import cv2;import random;img = cv2.imread(&quot;E:\\avatar_small.jpg&quot;);imgSize = img.shape;y=i...
+ 滤波操作
+来，咱们首先产生些噪点
+12345678910111213import cv2;import random;img = cv2.imread(&quot;E:\\avatar_small.jpg&quot;);imgSize = img.shape;...
       
     
   </div>
@@ -3172,11 +3185,9 @@ AOP的关键术语解析
 是不是买了台电钢放在宿舍的桌上发现位置不够放键盘了呢？
 
 ne，何不把电钢琴变成你的键盘呢？
-
-
-
+ 
 参考代码
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636...
       
     
   </div>
@@ -3245,7 +3256,7 @@ ne，何不把电钢琴变成你的键盘呢？
     
       
         <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='http://mms1.baidu.com/it/u=8719284,3173250204&fm=253&app=138&f=JPEG?w=507&h=500'/>
+          <img no-lazy src='https://p3.itc.cn/q_70/images03/20231021/c3c9111f36ab43d2aa82c6d0bcddf073.jpeg'/>
         </a>
       
     

@@ -41,11 +41,11 @@
 <meta property="og:title" content="STM32时钟树配置笔记">
 <meta property="og:url" content="https://huugh.cn/2022/02/03/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hugh的小窝">
-<meta property="og:description" content="PS：仅列出常用或默认的操作，对标野火的STM32F103教学视频整理出的笔记  0x00 时钟的配置过程总结HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子 0x01 HSE时钟 (High Speed Ex">
+<meta property="og:description" content="PS：仅列出常用或默认的操作，对标野火的STM32F103教学视频整理出的笔记   0x00 时钟的配置过程总结 HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子  0x01 HSE时钟 (High Speed">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2022-02-03T03:20:19.000Z">
-<meta property="article:modified_time" content="2025-03-12T15:56:39.895Z">
+<meta property="article:modified_time" content="2025-03-13T03:26:31.570Z">
 <meta property="article:author" content="Hugh">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="嵌入式">
@@ -1746,7 +1746,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1741796485777),
+    lastupdate: new Date(1741836882020),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2165,7 +2165,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <!-- Custom Files headEnd end-->
   <!-- front-matter head_end begin -->
   <!-- front-matter head_end end -->
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://unpkg.com/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://unpkg.com/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
   <body itemscope itemtype="http://schema.org/WebPage">
     <!-- import body_begin begin-->
     <!-- import body_begin end-->
@@ -2552,18 +2556,22 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p><em><strong>PS：仅列出常用或默认的操作，对标<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yW411Y7Gw?p=23&spm_id_from=pageDriver">野火的STM32F103教学视频</a>整理出的笔记</strong></em></p>
-<p><img src="/../images/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/%E6%97%B6%E9%92%9F%E6%A0%91.png" class="lazyload" data-srcset="/../images/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/%E6%97%B6%E9%92%9F%E6%A0%91.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="时钟树"></p>
-<h4 id="0x00-时钟的配置过程总结"><a href="#0x00-时钟的配置过程总结" class="headerlink" title="0x00 时钟的配置过程总结"></a>0x00 时钟的配置过程总结</h4><p>HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子</p>
-<h4 id="0x01-HSE时钟-High-Speed-External-Clock-signal-高速外部时钟（4M-16M）一般用8M晶振"><a href="#0x01-HSE时钟-High-Speed-External-Clock-signal-高速外部时钟（4M-16M）一般用8M晶振" class="headerlink" title="0x01 HSE时钟 (High Speed External Clock signal) 高速外部时钟（4M~16M）一般用8M晶振"></a>0x01 HSE时钟 <em>(High Speed External Clock signal)</em> 高速外部时钟（4M~16M）一般用8M晶振</h4><p>**特性：**计时精准</p>
+    <p><em><strong>PS：仅列出常用或默认的操作，对标<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yW411Y7Gw?p=23&amp;spm_id_from=pageDriver">野火的STM32F103教学视频</a>整理出的笔记</strong></em></p>
+<p><img src="/images/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/%E6%97%B6%E9%92%9F%E6%A0%91.png" class="lazyload" data-srcset="/images/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/%E6%97%B6%E9%92%9F%E6%A0%91.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="时钟树"></p>
+<h4 id="0x00-时钟的配置过程总结"><a class="markdownIt-Anchor" href="#0x00-时钟的配置过程总结"></a> 0x00 时钟的配置过程总结</h4>
+<p>HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;PLLCLK为72M-&gt;给系统时钟-&gt;三条总线(AHB 1分频-&gt;APB1 二分频，APB2配置一分频)-&gt;外设在使用时配置倍频因子</p>
+<h4 id="0x01-hse时钟-high-speed-external-clock-signal-高速外部时钟4m~16m一般用8m晶振"><a class="markdownIt-Anchor" href="#0x01-hse时钟-high-speed-external-clock-signal-高速外部时钟4m~16m一般用8m晶振"></a> 0x01 HSE时钟 <em>(High Speed External Clock signal)</em> 高速外部时钟（4M~16M）一般用8M晶振</h4>
+<p>**特性：**计时精准</p>
 <p>**寄存器：**RCC_CR</p>
 <p>**开启方式：**把16位HSEON 置1</p>
 <p>**就绪位：**启振需要一定时间，当第17位HSEREDY为1时，HSE准备好，对应位17</p>
-<h4 id="0x02-HSI-High-Speed-Internal-Clock-signal-——高速内部时钟（8M）"><a href="#0x02-HSI-High-Speed-Internal-Clock-signal-——高速内部时钟（8M）" class="headerlink" title="0x02 HSI (High Speed Internal Clock signal)——高速内部时钟（8M）"></a>0x02 HSI <em>(High Speed</em> Intern<em>al Clock signal)</em>——高速内部时钟（8M）</h4><p>**特性：**精度小、受温度影响大，当HSE故障时就用的这个，直到HSE启动成功</p>
+<h4 id="0x02-hsi-high-speed-internal-clock-signal高速内部时钟8m"><a class="markdownIt-Anchor" href="#0x02-hsi-high-speed-internal-clock-signal高速内部时钟8m"></a> 0x02 HSI <em>(High Speed</em> Intern<em>al Clock signal)</em>——高速内部时钟（8M）</h4>
+<p>**特性：**精度小、受温度影响大，当HSE故障时就用的这个，直到HSE启动成功</p>
 <p>**寄存器：**RCC_CR</p>
 <p>**开启方式：**把0位HSION置1</p>
 <p>**就绪位：**第一位HSIRDY为1，HSI准备好</p>
-<h4 id="0x03-锁相环时钟PLLCLK"><a href="#0x03-锁相环时钟PLLCLK" class="headerlink" title="0x03 锁相环时钟PLLCLK"></a>0x03 锁相环时钟PLLCLK</h4><p>**寄存器：**RCC_CFGR</p>
+<h4 id="0x03-锁相环时钟pllclk"><a class="markdownIt-Anchor" href="#0x03-锁相环时钟pllclk"></a> 0x03 锁相环时钟PLLCLK</h4>
+<p>**寄存器：**RCC_CFGR</p>
 <p>几个常用的位</p>
 <table>
 <thead>
@@ -2573,12 +2581,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <th>PLLMUL</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>分频用的</td>
 <td>设置时钟源是HSE还是HSI</td>
 <td>倍频因子，最大16</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>PLLXTPRE</strong></p>
 <p>PLLXTPRE是分频用的</p>
 <ul>
@@ -2587,39 +2597,46 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <p><strong>LLSRC</strong></p>
 <ul>
-<li>0为HSI&#x2F;2 作为PLL输入时钟</li>
+<li>0为HSI/2 作为PLL输入时钟</li>
 <li>1为HSE作为输入时钟(常用)</li>
 </ul>
 <p><strong>PLLMUL 倍频因子，最大为16</strong></p>
 <ul>
-<li>可以选择倍频<ul>
-<li>在这里配置倍频因子为9，将HSE配置到72MHz(8*9&#x3D;72)</li>
+<li>可以选择倍频
+<ul>
+<li>在这里配置倍频因子为9，将HSE配置到72MHz(8*9=72)</li>
 <li>如果HSE故障了，HSI的8M直接作为系统时钟</li>
 </ul>
 </li>
 </ul>
-<h4 id="0x04-系统时钟SYSCLK"><a href="#0x04-系统时钟SYSCLK" class="headerlink" title="0x04 系统时钟SYSCLK"></a>0x04 系统时钟SYSCLK</h4><ul>
-<li>来源 HSI HSE PLLCLK，最大72HMz，一般配置系统时钟等于PLLCLK<ul>
+<h4 id="0x04-系统时钟sysclk"><a class="markdownIt-Anchor" href="#0x04-系统时钟sysclk"></a> 0x04 系统时钟SYSCLK</h4>
+<ul>
+<li>来源 HSI HSE PLLCLK，最大72HMz，一般配置系统时钟等于PLLCLK
+<ul>
 <li>通过系统时钟切换位（CFGR寄存器） 配置成10为PLL输出作为系统时钟（常用）</li>
 <li>切换需要时间，SWS位是10说明时钟切换完毕</li>
 </ul>
 </li>
 </ul>
-<h4 id="0x05-AHB预分频器"><a href="#0x05-AHB预分频器" class="headerlink" title="0x05 AHB预分频器"></a>0x05 AHB预分频器</h4><p>**寄存器：**RCC_CFGR HPRE[3:0]，<strong>常配置为1，意为不分频</strong></p>
+<h4 id="0x05-ahb预分频器"><a class="markdownIt-Anchor" href="#0x05-ahb预分频器"></a> 0x05 AHB预分频器</h4>
+<p>**寄存器：**RCC_CFGR HPRE[3:0]，<strong>常配置为1，意为不分频</strong></p>
 <ul>
-<li>APB1预分频器<ul>
+<li>APB1预分频器
+<ul>
 <li>最高36Mhz,常配置分频因子为2</li>
 </ul>
 </li>
-<li>APB2预分频器（高速总线）<ul>
+<li>APB2预分频器（高速总线）
+<ul>
 <li>最高72Mhz,常配置分频因子配置1</li>
 </ul>
 </li>
 </ul>
-<h4 id="0x06-CSS时钟安全系统"><a href="#0x06-CSS时钟安全系统" class="headerlink" title="0x06 CSS时钟安全系统"></a>0x06 CSS时钟安全系统</h4><p>**概述：**当HSE故障时，产生CSSI中断</p>
+<h4 id="0x06-css时钟安全系统"><a class="markdownIt-Anchor" href="#0x06-css时钟安全系统"></a> 0x06 CSS时钟安全系统</h4>
+<p>**概述：**当HSE故障时，产生CSSI中断</p>
 <p><strong>使用过程：</strong></p>
 <p>中断时配置HSI为系统时钟，先经过二分频，然后经过PLLSRC，倍频因子选择16，配置系统频率为64M</p>
-<p>64M下，某些外设可以正常运作，但最保险的情况就是通知用户&#x2F;保存数据</p>
+<p>64M下，某些外设可以正常运作，但最保险的情况就是通知用户/保存数据</p>
 <p><strong>默认状态：</strong></p>
 <p>当CSSI中断没有被配置的时候，HSI的8M默认作为系统时钟</p>
 
@@ -2646,10 +2663,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-12T23:56:39+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-03-13T11:26:31+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 12, 2025</p>
+    <p>更新于：Mar 13, 2025</p>
   </a>
 </div>
 
@@ -2738,9 +2755,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='next' href='/2022/01/28/AOP%E5%8E%9F%E7%90%86%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E2%80%94%E2%80%94%E6%9C%89%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%97%A0%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0/'>
           <p class='title'>AOP原理之动态代理——有接口和无接口的实现<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>动态代理是啥东东动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程
+          <p class='content'> 动态代理是啥东东
+动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程
 简单来说，就是把原来应该执行的方法给拦截下来，执行我们代理类中提供的代码
-具象化一些，就...</p>
+具象化一些...</p>
         </a>
       
     </div>
@@ -2798,7 +2816,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x00-%E6%97%B6%E9%92%9F%E7%9A%84%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="toc-text">0x00 时钟的配置过程总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x01-HSE%E6%97%B6%E9%92%9F-High-Speed-External-Clock-signal-%E9%AB%98%E9%80%9F%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%EF%BC%884M-16M%EF%BC%89%E4%B8%80%E8%88%AC%E7%94%A88M%E6%99%B6%E6%8C%AF"><span class="toc-text">0x01 HSE时钟 (High Speed External Clock signal) 高速外部时钟（4M~16M）一般用8M晶振</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x02-HSI-High-Speed-Internal-Clock-signal-%E2%80%94%E2%80%94%E9%AB%98%E9%80%9F%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%EF%BC%888M%EF%BC%89"><span class="toc-text">0x02 HSI (High Speed Internal Clock signal)——高速内部时钟（8M）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x03-%E9%94%81%E7%9B%B8%E7%8E%AF%E6%97%B6%E9%92%9FPLLCLK"><span class="toc-text">0x03 锁相环时钟PLLCLK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x04-%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9FSYSCLK"><span class="toc-text">0x04 系统时钟SYSCLK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x05-AHB%E9%A2%84%E5%88%86%E9%A2%91%E5%99%A8"><span class="toc-text">0x05 AHB预分频器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x06-CSS%E6%97%B6%E9%92%9F%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F"><span class="toc-text">0x06 CSS时钟安全系统</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x00-%E6%97%B6%E9%92%9F%E7%9A%84%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="toc-text"> 0x00 时钟的配置过程总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x01-hse%E6%97%B6%E9%92%9F-high-speed-external-clock-signal-%E9%AB%98%E9%80%9F%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F4m~16m%E4%B8%80%E8%88%AC%E7%94%A88m%E6%99%B6%E6%8C%AF"><span class="toc-text"> 0x01 HSE时钟 (High Speed External Clock signal) 高速外部时钟（4M~16M）一般用8M晶振</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x02-hsi-high-speed-internal-clock-signal%E9%AB%98%E9%80%9F%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F8m"><span class="toc-text"> 0x02 HSI (High Speed Internal Clock signal)——高速内部时钟（8M）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x03-%E9%94%81%E7%9B%B8%E7%8E%AF%E6%97%B6%E9%92%9Fpllclk"><span class="toc-text"> 0x03 锁相环时钟PLLCLK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x04-%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9Fsysclk"><span class="toc-text"> 0x04 系统时钟SYSCLK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x05-ahb%E9%A2%84%E5%88%86%E9%A2%91%E5%99%A8"><span class="toc-text"> 0x05 AHB预分频器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x06-css%E6%97%B6%E9%92%9F%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F"><span class="toc-text"> 0x06 CSS时钟安全系统</span></a></li></ol>
     </div>
   </section>
 
@@ -3368,7 +3386,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Hugh的小窝","url":"https://huugh.cn/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/","sameAs":["https://github.com/volantis-x"],"description":"Hugh的小窝"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://huugh.cn/","name":"Hugh的小窝"}},{"@type":"ListItem","position":3,"item":{"@id":"https://huugh.cn/2022/02/03/STM32时钟树配置笔记/","name":"STM32时钟树配置笔记"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Hugh的小窝","url":"https://huugh.cn/","keywords":null,"description":"Hugh的小窝","author":{"@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/","description":"Hugh的小窝"},"publisher":{"@type":"Organization","name":"Hugh的小窝","url":"https://huugh.cn/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://huugh.cn?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"STM32时钟树配置笔记","description":"Hugh的小窝","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://huugh.cn/2022/02/03/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/"},"author":{"@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/"},"publisher":{"@type":"Organization","name":"Hugh的小窝","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://huugh.cn/2022/02/03/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/","wordCount":0,"datePublished":"2022-02-03T03:20:19.000Z","dateModified":"2025-03-12T15:56:39.895Z","keywords":"STM32,嵌入式","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Hugh的小窝","url":"https://huugh.cn/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/","sameAs":["https://github.com/volantis-x"],"description":"Hugh的小窝"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://huugh.cn/","name":"Hugh的小窝"}},{"@type":"ListItem","position":3,"item":{"@id":"https://huugh.cn/2022/02/03/STM32时钟树配置笔记/","name":"STM32时钟树配置笔记"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Hugh的小窝","url":"https://huugh.cn/","keywords":null,"description":"Hugh的小窝","author":{"@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/","description":"Hugh的小窝"},"publisher":{"@type":"Organization","name":"Hugh的小窝","url":"https://huugh.cn/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://huugh.cn?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"STM32时钟树配置笔记","description":"Hugh的小窝","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://huugh.cn/2022/02/03/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/"},"author":{"@type":"Person","name":"Hugh","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://huugh.cn/"},"publisher":{"@type":"Organization","name":"Hugh的小窝","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://huugh.cn/2022/02/03/STM32%E6%97%B6%E9%92%9F%E6%A0%91%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0/","wordCount":0,"datePublished":"2022-02-03T03:20:19.000Z","dateModified":"2025-03-13T03:26:31.570Z","keywords":"STM32,嵌入式","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
