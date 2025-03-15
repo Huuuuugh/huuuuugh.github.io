@@ -1742,7 +1742,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1742021374093),
+    lastupdate: new Date(1742023296296),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2531,9 +2531,81 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://huugh.cn/2025/03/15/目标检测中，如何估计目标的角度呢？/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hugh的小窝">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="Hugh的小窝">
+    <meta itemprop="description" content="Hugh的小窝">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2025/03/15/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/"  itemprop="url">
+        目标检测中，如何估计目标的角度呢？
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+         引入
+在准备工训实践大赛的过程中，你一定被机械臂困扰过吧？得到了一个物体的框了，应该让机械臂旋转多少度才能更好的抓取物体呢？例如，这里有一个矿泉水瓶。
+
+我们应该让机械臂旋转到刚好能抓到瓶子的“腰上”，而不是从瓶盖抓到瓶身，因为我们的机械夹爪可能没这么长。
+下面这个视频是我们当时做的效果。
+ 
+ 实现
+原理十分简单，通过轮廓检测算子得到物体的轮廓，然后进行线性回归得到w和b即可，最后对w取...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+          
+          <a class='avatar' href='/'><img src='https://avatars.githubusercontent.com/u/78962972?s=40&v=4'></a>
+          <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="image" content="https://avatars.githubusercontent.com/u/78962972?s=40&v=4">
+            <meta itemprop="name" content="Hugh">
+            <meta itemprop="url" content="/">
+          </span>
+        
+        <time itemprop="dateCreated datePublished" datetime="2025-03-15T15:02:36+08:00">2025-03-15</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2025/03/15/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -3150,74 +3222,6 @@ YOLOv5的物象识别效果真是惊艳！
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://huugh.cn/2022/01/25/图像处理笔记：滤波、腐蚀、膨胀、梯度及Sobel算子/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hugh的小窝">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="Hugh的小窝">
-    <meta itemprop="description" content="Hugh的小窝">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/01/25/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%BB%A4%E6%B3%A2%E3%80%81%E8%85%90%E8%9A%80%E3%80%81%E8%86%A8%E8%83%80%E3%80%81%E6%A2%AF%E5%BA%A6%E5%8F%8ASobel%E7%AE%97%E5%AD%90/"  itemprop="url">
-        图像处理笔记：滤波、腐蚀、膨胀、梯度及Sobel算子
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-         准备工作
-读取灰度图的方法：
-1img = imread(&lt;path&gt;,cv2.IMREAD_GRAYSCALE);
- 滤波操作
-来，咱们首先产生些噪点
-12345678910111213import cv2;import random;img = cv2.imread(&quot;E:\\avatar_small.jpg&quot;);imgSize = img.shape;...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-          
-          <a class='avatar' href='/'><img src='https://avatars.githubusercontent.com/u/78962972?s=40&v=4'></a>
-          <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <meta itemprop="image" content="https://avatars.githubusercontent.com/u/78962972?s=40&v=4">
-            <meta itemprop="name" content="Hugh">
-            <meta itemprop="url" content="/">
-          </span>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-01-25T14:39:50+08:00">2022-01-25</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/01/25/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%BB%A4%E6%B3%A2%E3%80%81%E8%85%90%E8%9A%80%E3%80%81%E8%86%A8%E8%83%80%E3%80%81%E6%A2%AF%E5%BA%A6%E5%8F%8ASobel%E7%AE%97%E5%AD%90/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -3337,7 +3341,7 @@ YOLOv5的物象识别效果真是惊艳！
 
 
     <div class='content'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/Android/" style="font-size: 14px; color: #999">Android</a> <a href="/tags/GPS/" style="font-size: 14px; color: #999">GPS</a> <a href="/tags/Java/" style="font-size: 21.5px; color: #666">Java</a> <a href="/tags/Matlab/" style="font-size: 14px; color: #999">Matlab</a> <a href="/tags/OpenCV/" style="font-size: 19px; color: #777">OpenCV</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 24px; color: #555">Python</a> <a href="/tags/STM32/" style="font-size: 14px; color: #999">STM32</a> <a href="/tags/Socket/" style="font-size: 16.5px; color: #888">Socket</a> <a href="/tags/Spring/" style="font-size: 14px; color: #999">Spring</a> <a href="/tags/Win32/" style="font-size: 14px; color: #999">Win32</a> <a href="/tags/YOLO/" style="font-size: 14px; color: #999">YOLO</a> <a href="/tags/%E5%88%86%E7%B1%BB/" style="font-size: 14px; color: #999">分类</a> <a href="/tags/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/%E5%9B%9E%E5%BD%92/" style="font-size: 14px; color: #999">回归</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 14px; color: #999">嵌入式</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3%E5%BA%94%E7%94%A8/" style="font-size: 14px; color: #999">有趣应用</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6/" style="font-size: 14px; color: #999">机器人运动学</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/%E6%A0%88/" style="font-size: 14px; color: #999">栈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 16.5px; color: #888">深度学习</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 16.5px; color: #888">目标检测</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" style="font-size: 16.5px; color: #888">网络通信</a> <a href="/tags/%E9%92%A2%E7%90%B4/" style="font-size: 14px; color: #999">钢琴</a>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/Android/" style="font-size: 14px; color: #999">Android</a> <a href="/tags/GPS/" style="font-size: 14px; color: #999">GPS</a> <a href="/tags/Java/" style="font-size: 21.5px; color: #666">Java</a> <a href="/tags/Matlab/" style="font-size: 14px; color: #999">Matlab</a> <a href="/tags/OpenCV/" style="font-size: 19px; color: #777">OpenCV</a> <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 24px; color: #555">Python</a> <a href="/tags/STM32/" style="font-size: 14px; color: #999">STM32</a> <a href="/tags/Socket/" style="font-size: 16.5px; color: #888">Socket</a> <a href="/tags/Spring/" style="font-size: 14px; color: #999">Spring</a> <a href="/tags/Win32/" style="font-size: 14px; color: #999">Win32</a> <a href="/tags/YOLO/" style="font-size: 14px; color: #999">YOLO</a> <a href="/tags/%E5%88%86%E7%B1%BB/" style="font-size: 14px; color: #999">分类</a> <a href="/tags/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/%E5%9B%9E%E5%BD%92/" style="font-size: 14px; color: #999">回归</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 14px; color: #999">嵌入式</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3%E5%BA%94%E7%94%A8/" style="font-size: 14px; color: #999">有趣应用</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E5%AD%A6/" style="font-size: 14px; color: #999">机器人运动学</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/%E6%A0%88/" style="font-size: 14px; color: #999">栈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 16.5px; color: #888">深度学习</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" style="font-size: 19px; color: #777">目标检测</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" style="font-size: 16.5px; color: #888">网络通信</a> <a href="/tags/%E9%92%A2%E7%90%B4/" style="font-size: 14px; color: #999">钢琴</a>
     </div>
   </section>
 
