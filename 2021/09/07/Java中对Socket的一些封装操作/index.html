@@ -1747,7 +1747,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1742023296296),
+    lastupdate: new Date(1742177779400),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2560,10 +2560,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <p>大家好，我是<strong>美有Huuuuugh。</strong></p>
 <p>帅哥的<strong>网络通信</strong>秘诀，在做网络编程的时候是不是像这样磨磨唧唧的写出来BufferedReader和BufferedWriter然后再慢吞吞的开几个线程呢？</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(socket.getInputStream(),StandardCharsets.UTF_8));</span><br><span class="line"><span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(socket.getOutputStream(), StandardCharsets.UTF_8));</span><br><span class="line">bw.write(message+<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">bw.flush();</span><br></pre></td></tr></table></figure>
-<p>😃太low了！<br>
-听好了，是帅哥的话，就应该把Socket封装起来，</p>
-<h1 id="java实现"><a class="markdownIt-Anchor" href="#java实现"></a> Java实现</h1>
-<p>要先写一个<strong>Socket事件</strong></p>
+<p>😃太low了！<br>听好了，是帅哥的话，就应该把Socket封装起来，</p>
+<h1 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h1><p>要先写一个<strong>Socket事件</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SocketEvent</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ConnectedSocket <span class="title function_">getConnectedSocket</span><span class="params">()</span>&#123; <span class="keyword">return</span> (ConnectedSocket)<span class="built_in">this</span>; &#125;<span class="comment">//获取封装后的对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后再写一个<strong>MessageHandler接口</strong>用来存储事件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MessageHandler</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">onMessageReceive</span><span class="params">(SocketEvent e, String message)</span>;<span class="comment">//信息接收事件(必须覆写)</span></span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">onClientConnected</span><span class="params">(SocketEvent e)</span> &#123; &#125;<span class="comment">//连接事件(默认无处理，可选覆写)</span></span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">onClientDisconnected</span><span class="params">(SocketEvent e)</span> &#123; &#125;<span class="comment">//断开连接事件(默认无处理，可选覆写)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2684,13 +2682,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2021/09/22/%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%99%A8%E5%90%A7%EF%BC%81/'>
           <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>用栈实现中缀表达式计算器吧！</p>
-          <p class='content'> 啥是栈？
-栈概念图
+          <p class='content'>啥是栈？栈概念图
 
 栈是一个暂时存储数据的地方，它有pop(弹栈、出栈)的操作，也有push(入栈)的操作， 这一点有点类似于弹匣
 弹栈就是取出顶部的一个数据，像这样
 
-而入栈就是反过来的操...</p>
+而入栈就是反过来的操作。...</p>
         </a>
       
       
@@ -2861,7 +2858,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         
-          <div><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span>
+          <div><p><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span></p>
 </div>
         
       

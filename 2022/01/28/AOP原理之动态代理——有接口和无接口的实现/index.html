@@ -41,7 +41,7 @@
 <meta property="og:title" content="AOP原理之动态代理——有接口和无接口的实现">
 <meta property="og:url" content="https://huugh.cn/2022/01/28/AOP%E5%8E%9F%E7%90%86%E4%B9%8B%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E2%80%94%E2%80%94%E6%9C%89%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%97%A0%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hugh的小窝">
-<meta property="og:description" content="动态代理是啥东东 动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程 简单来说，就是把原来应该执行的方法给拦截下来，执行我们代理类中提供的代码 具象化一些，就是在原来方法的前后新增加一些代码，同时不用改动原来的方法  AOP的关键术语解析    连接点 类中可以被增强的方法     切入点 真正被增强的方法   通知、增强 实际增强的代码   切面 把增强塞">
+<meta property="og:description" content="动态代理是啥东东动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程 简单来说，就是把原来应该执行的方法给拦截下来，执行我们代理类中提供的代码 具象化一些，就是在原来方法的前后新增加一些代码，同时不用改动原来的方法 AOP的关键术语解析    连接点 类中可以被增强的方法     切入点 真正被增强的方法   通知、增强 实际增强的代码   切面 把增强塞进切入">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2022-01-28T12:36:44.000Z">
@@ -1748,7 +1748,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1742023296296),
+    lastupdate: new Date(1742177779400),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2558,11 +2558,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h2 id="动态代理是啥东东"><a class="markdownIt-Anchor" href="#动态代理是啥东东"></a> 动态代理是啥东东</h2>
-<p>动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程</p>
+    <h2 id="动态代理是啥东东"><a href="#动态代理是啥东东" class="headerlink" title="动态代理是啥东东"></a>动态代理是啥东东</h2><p>动态代理的目的就是为了在不改变源代码的情况下对某些业务逻辑进行增强，AOP即面向切面编程</p>
 <p>简单来说，就是把原来应该执行的方法给拦截下来，执行我们代理类中提供的代码</p>
 <p>具象化一些，就是在原来方法的前后新增加一些代码，同时不用改动原来的方法</p>
-<h2 id="aop的关键术语解析"><a class="markdownIt-Anchor" href="#aop的关键术语解析"></a> AOP的关键术语解析</h2>
+<h2 id="AOP的关键术语解析"><a href="#AOP的关键术语解析" class="headerlink" title="AOP的关键术语解析"></a>AOP的关键术语解析</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2585,6 +2584,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </tr>
 </tbody>
 </table>
+</div>
 <p>动态代理有两种类型</p>
 <ul>
 <li>有实现某些接口的类的对象动态代理</li>
@@ -2592,8 +2592,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <p>有实现某些接口的类的对象的动态代理采用JDK动态代理（使用java.lang.reflect.Proxy类）</p>
 <p>未实现任何接口的类的对象的动态代理采用CGLib动态代理</p>
-<h2 id="有接口的实现"><a class="markdownIt-Anchor" href="#有接口的实现"></a> 有接口的实现</h2>
-<p>既然有接口，那我们先写出一个简单的接口</p>
+<h2 id="有接口的实现"><a href="#有接口的实现" class="headerlink" title="有接口的实现"></a>有接口的实现</h2><p>既然有接口，那我们先写出一个简单的接口</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.hugh;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IUser</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接口有了，我们需要有一个类来实现它</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.hugh;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">IUser</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;User 对象 add 方法执行&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2602,6 +2601,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>我们来看看它的三个参数</p>
 <p><strong>1.ClassLoader</strong></p>
 <p>类加载器，jvm启动时三个类加载器，分别是，</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -2620,6 +2620,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </tr>
 </tbody>
 </table>
+</div>
 <p>我们写的这些类都是由<em>appclassloader</em>加载，因此大可不必拘泥这个ClassLoader是哪个类的，直接对应用类使用getClassLoader就好啦！比方说可以填这个</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.class.getClassLoader()</span><br></pre></td></tr></table></figure>
 <p><strong>2.Class&lt;?&gt;interfaces</strong></p>
@@ -2641,8 +2642,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">执行前增强</span><br><span class="line">User 对象 add 方法执行</span><br><span class="line">执行后</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
 <p>总代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test.hugh;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PureAOP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(User.class.getClassLoader());</span><br><span class="line">        <span class="type">IUser</span> <span class="variable">myUser</span> <span class="operator">=</span> (IUser) Proxy.newProxyInstance(User.class.getClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;IUser.class&#125;,<span class="keyword">new</span> <span class="title class_">UserAgent</span>(<span class="keyword">new</span> <span class="title class_">User</span>()));</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> myUser.add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserAgent</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    IUser user;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserAgent</span><span class="params">(IUser user)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.user=user;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;&quot;</span>+method.getName());</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> (Integer)method.invoke(user,args);</span><br><span class="line">        System.out.println(<span class="string">&quot;执行后&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="无接口的实现"><a class="markdownIt-Anchor" href="#无接口的实现"></a> 无接口的实现</h2>
-<p>在这里我们需要用到CGLib</p>
+<h2 id="无接口的实现"><a href="#无接口的实现" class="headerlink" title="无接口的实现"></a>无接口的实现</h2><p>在这里我们需要用到CGLib</p>
 <p>添加maven依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/cglib/cglib --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;cglib&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;cglib&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.3</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <p>和JDK动态代理十分类似，这里不再赘述了，与JDK动态代理的区别在于，CGLib的动态代理更像是给被代理的类创建了一个子类</p>
@@ -2762,18 +2762,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>STM32时钟树配置笔记</p>
           <p class='content'>PS：仅列出常用或默认的操作，对标野火的STM32F103教学视频整理出的笔记
 
- 0x00 时钟的配置过程总结
-HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt...</p>
+0x00 时钟的配置过程总结HSE配置系统时钟-&gt;不分频进入锁相环时钟源-&gt;倍频因子为9-&gt;P...</p>
         </a>
       
       
         <a class='next' href='/2022/01/26/%E6%8F%90%E5%8F%96YOLOv5%E5%9B%BE%E5%83%8F%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/'>
           <p class='title'>提取YOLOv5图像分析结果<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'> 取得模型推理出的位置数据、类
-YOLOv5的物象识别效果真是惊艳！
+          <p class='content'>取得模型推理出的位置数据、类YOLOv5的物象识别效果真是惊艳！
 不过当我有这样一个需求：取得某个物件在图片中的的具体位置的数据并取出，供其他语言、类来调用应该如何操作呢？
 
-通过分析代码可...</p>
+通过分析代码可以知...</p>
         </a>
       
     </div>
@@ -2831,7 +2829,7 @@ YOLOv5的物象识别效果真是惊艳！
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%95%A5%E4%B8%9C%E4%B8%9C"><span class="toc-text"> 动态代理是啥东东</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aop%E7%9A%84%E5%85%B3%E9%94%AE%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90"><span class="toc-text"> AOP的关键术语解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text"> 有接口的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text"> 无接口的实现</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%95%A5%E4%B8%9C%E4%B8%9C"><span class="toc-text">动态代理是啥东东</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP%E7%9A%84%E5%85%B3%E9%94%AE%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90"><span class="toc-text">AOP的关键术语解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">有接口的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">无接口的实现</span></a></li></ol>
     </div>
   </section>
 
@@ -2943,7 +2941,7 @@ YOLOv5的物象识别效果真是惊艳！
     
       
         
-          <div><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span>
+          <div><p><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span></p>
 </div>
         
       

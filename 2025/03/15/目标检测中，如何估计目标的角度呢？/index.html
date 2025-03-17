@@ -41,7 +41,7 @@
 <meta property="og:title" content="目标检测中，如何估计目标的角度呢？">
 <meta property="og:url" content="https://huugh.cn/2025/03/15/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Hugh的小窝">
-<meta property="og:description" content="引入 在准备工训实践大赛的过程中，你一定被机械臂困扰过吧？得到了一个物体的框了，应该让机械臂旋转多少度才能更好的抓取物体呢？例如，这里有一个矿泉水瓶。  我们应该让机械臂旋转到刚好能抓到瓶子的“腰上”，而不是从瓶盖抓到瓶身，因为我们的机械夹爪可能没这么长。 下面这个视频是我们当时做的效果。    实现 原理十分简单，通过轮廓检测算子得到物体的轮廓，然后进行线性回归得到w和b即可，最后对w取反正切">
+<meta property="og:description" content="引入在准备工训实践大赛的过程中，你一定被机械臂困扰过吧？得到了一个物体的框了，应该让机械臂旋转多少度才能更好的抓取物体呢？例如，这里有一个矿泉水瓶。  我们应该让机械臂旋转到刚好能抓到瓶子的“腰上”，而不是从瓶盖抓到瓶身，因为我们的机械夹爪可能没这么长。 下面这个视频是我们当时做的效果。    实现原理十分简单，通过轮廓检测算子得到物体的轮廓，然后进行线性回归得到w和b即可，最后对w取反正切函数变">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2025-03-15T07:02:36.000Z">
@@ -1746,7 +1746,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1742023296296),
+    lastupdate: new Date(1742177779400),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2556,17 +2556,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h1 id="引入"><a class="markdownIt-Anchor" href="#引入"></a> 引入</h1>
-<p>在准备工训实践大赛的过程中，你一定被机械臂困扰过吧？得到了一个物体的框了，应该让<strong>机械臂旋转多少度</strong>才能更好的抓取物体呢？例如，这里有一个矿泉水瓶。</p>
-<p><img src="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315150550940.png" class="lazyload" data-srcset="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315150550940.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315150550940"></p>
+    <h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><p>在准备工训实践大赛的过程中，你一定被机械臂困扰过吧？得到了一个物体的框了，应该让<strong>机械臂旋转多少度</strong>才能更好的抓取物体呢？例如，这里有一个矿泉水瓶。</p>
+<p><img src="/images/目标检测中，如何估计目标的角度呢？/image-20250315150550940.png" class="lazyload" data-srcset="/images/目标检测中，如何估计目标的角度呢？/image-20250315150550940.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315150550940"></p>
 <p>我们应该让机械臂旋转到刚好能抓到瓶子的“<strong>腰上</strong>”，而不是从瓶盖抓到瓶身，因为我们的机械夹爪可能没这么长。</p>
 <p>下面这个视频是我们当时做的效果。</p>
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe src="/images/目标检测中，如何估计目标的角度呢？/result.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
 height: 100%; left: 0; top: 0;"> </iframe></div>
-<h1 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h1>
-<p>原理十分简单，通过轮廓检测算子得到物体的轮廓，然后进行线性回归得到w和b即可，最后对w取反正切函数变为角度值。</p>
-<p><img src="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315152116737.png" class="lazyload" data-srcset="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315152116737.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315152116737"></p>
-<p><img src="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315151359796.png" class="lazyload" data-srcset="/images/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%B0%E8%AE%A1%E7%9B%AE%E6%A0%87%E7%9A%84%E8%A7%92%E5%BA%A6%E5%91%A2%EF%BC%9F/image-20250315151359796.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315151359796"></p>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>原理十分简单，通过轮廓检测算子得到物体的轮廓，然后进行线性回归得到w和b即可，最后对w取反正切函数变为角度值。</p>
+<p><img src="/images/目标检测中，如何估计目标的角度呢？/image-20250315152116737.png" class="lazyload" data-srcset="/images/目标检测中，如何估计目标的角度呢？/image-20250315152116737.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315152116737"></p>
+<p><img src="/images/目标检测中，如何估计目标的角度呢？/image-20250315151359796.png" class="lazyload" data-srcset="/images/目标检测中，如何估计目标的角度呢？/image-20250315151359796.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250315151359796"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calcAng</span>(<span class="params">img</span>):</span><br><span class="line">    edges = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line">    w, h, _ = image.shape</span><br><span class="line">    y, x = np.where(edges)</span><br><span class="line">    X = np.stack((x,), axis=-<span class="number">1</span>)</span><br><span class="line">    A = np.hstack((np.ones((X.shape[<span class="number">0</span>], <span class="number">1</span>)), X))</span><br><span class="line">    w = np.linalg.lstsq(A, y, rcond=<span class="literal">None</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    theta = np.arctan(-w[::-<span class="number">1</span>][<span class="number">0</span>]) * <span class="number">180</span> / np.pi</span><br><span class="line">    <span class="keyword">if</span> h&gt;w <span class="keyword">and</span> theta&lt;<span class="number">30</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">90</span></span><br><span class="line">    <span class="keyword">return</span> theta</span><br></pre></td></tr></table></figure>
 <p>调用方法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theta = calcAng(img)</span><br></pre></td></tr></table></figure>
@@ -2681,8 +2680,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
       
         <a class='next' href='/2025/03/15/%E4%BD%BF%E7%94%A8%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E7%9A%84%E5%8A%9E%E6%B3%95%E5%A2%9E%E5%BC%BA%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86/'>
           <p class='title'>使用语义分割的办法增强目标检测的数据集<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'> 介绍
-在进行目标检测任务时，背景通常会成为影响我们识别的准确性，例如，模型有时候会把背景识别成 某件物体、两个物体相互遮挡掉一部分而识别错误等，并且卷积神经神经网络的旋转适应性有局限，缺乏显示...</p>
+          <p class='content'>介绍在进行目标检测任务时，背景通常会成为影响我们识别的准确性，例如，模型有时候会把背景识别成 某件物体、两个物体相互遮挡掉一部分而识别错误等，并且卷积神经神经网络的旋转适应性有局限，缺乏显示的旋...</p>
         </a>
       
     </div>
@@ -2852,7 +2850,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
     
       
         
-          <div><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span>
+          <div><p><!-- <span id="lc-sv">本站总访问量为 <span id='busuanzi_value_site_pv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='busuanzi_value_site_uv'><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span> 人</span><br/> --> <span id="lc-sv"><a href='beian.miit.gov.cn'>粤ICP备2021129470号-1</a></span></p>
 </div>
         
       
